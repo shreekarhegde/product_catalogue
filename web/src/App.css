@@ -59,3 +59,20 @@ main { padding-block: 1.5rem 4rem; }
   .nav { gap: .25rem 1rem; }
   .detail { grid-template-columns: 1fr; }
 }
+
+.search-field { position: relative; flex: 1; min-width: 0; }
+.search-options {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + .35rem);
+  inset-inline: 0;
+  margin: 0;
+  padding: .3rem;
+  list-style: none;
+  background: #fffef8;
+  border: 1px solid #a5ab9a;
+  border-radius: .4rem;
+  box-shadow: 0 .5rem 1rem #20282020;
+}
+.search-options li { padding: .55rem .65rem; border-radius: .25rem; cursor: pointer; overflow-wrap: anywhere; }
+.search-options li:hover, .search-options li[aria-selected="true"] { background: #e4e8d4; }

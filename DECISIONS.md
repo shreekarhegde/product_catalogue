@@ -9,7 +9,7 @@
 
 - **Home.** Show five owner-selected products in the order specified in a config file. Changing the selection requires a code change for this demo.
 - **Categories.** Sort by highest rating first, breaking ties by product ID. Feature up to three items and leave at least one in the remaining section when the category has two or more products. Show each product once.
-- **Search.** Search on submit. Trim the query and match it anywhere in the title or description, ignoring case. A blank query shows all products.
+- **Search.** Search on submit. Trim the query and match it anywhere in the title or description, ignoring case. A blank query shows all products. Suggest up to six matching product titles while the customer types. Selecting one submits a search for that title.
 - **Product details.** Give each product its own page with an Enquire button. Show demo prices in USD because the source has no currency field.
 - **Enquiries.** Require a name and email, with an optional message. Validate the product and contact details on the server, then send the email to the configured sales inbox. Show “Thank you” once the mail transport accepts it. Keep the form filled if sending fails.
 

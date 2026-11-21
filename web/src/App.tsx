@@ -1,9 +1,10 @@
 import { useCallback, useState } from "react";
-import type { FormEvent, ReactNode } from "react";
-import { Link, NavLink, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
+import type { ReactNode } from "react";
+import { Link, NavLink, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { api, type Product } from "./api";
 import { useRequest } from "./useRequest";
 import { EnquiryForm } from "./EnquiryForm";
+import { SearchForm } from "./SearchForm";
 import "./App.css";
 
 const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
@@ -21,22 +22,6 @@ function Resource<T>({ load, children }: {
     </div>
   );
   return children(result.data);
-}
-
-function SearchForm({ query }: { query: string }) {
-  const navigate = useNavigate();
-  function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const value = String(new FormData(event.currentTarget).get("q") ?? "").trim();
-    navigate(`/search?${new URLSearchParams({ q: value })}`);
-  }
-  return (
-    <form className="search" role="search" onSubmit={submit}>
-      <label className="sr-only" htmlFor="search-input">Search products</label>
-      <input id="search-input" name="q" type="search" defaultValue={query} maxLength={100} placeholder="Search products" />
-      <button type="submit">Search</button>
-    </form>
-  );
 }
 
 function ProductImage({ product }: { product: Product }) {
