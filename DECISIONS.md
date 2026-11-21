@@ -1,26 +1,36 @@
 # Decisions
 
-## Stack
+## Stack and scope
 
-- Use React and Node.js with TypeScript so reviewers can run the full flow in a browser.
-- Fetch catalogue data from Fake Store API through the backend. Send enquiry emails from the backend.
+- Use React and Express with TypeScript. The browser calls the Express API for catalogue data and enquiries.
+- Use Fake Store API for live products. Skip the database because there’s no catalogue editing or enquiry history in this version. The sales inbox keeps the enquiries.
+- Keep the product source and mail transport replaceable so a provider change can be made without rewriting the catalogue screens.
 
-## Product behavior
+## Catalogue and search
 
-- **Home.** Show five owner-selected products in the order specified in a config file. Changing the selection requires a code change for this demo. Put the featured grid directly below the navigation so products are visible on first load.
-- **Categories.** Sort by highest rating first, breaking ties by product ID. Feature up to three items and leave at least one in the remaining section when the category has two or more products. Show each product once.
-- **Search.** Search on submit. Trim the query and match it anywhere in the title or description, ignoring case. A blank query shows all products. Suggest up to six matching product titles while the customer types. Selecting one submits a search for that title.
-- **Product details.** Give each product its own page with an Enquire button. Show demo prices in USD because the source has no currency field.
-- **Enquiries.** Require a name and email, with an optional message. Validate the product and contact details on the server, then send the email to the configured sales inbox. Show “Thank you” once the mail transport accepts it. Keep the form filled if sending fails. Collapsing the form preserves the draft and any in-progress submission.
+- Show five featured products in a fixed order using a list of product IDs in the backend. Updating the picks requires a code change for now.
+- Put the featured grid directly below the navigation. The first layout used a large banner that pushed products below the fold, so we replaced it with a compact heading and kept the Browse all products link.
+- Build category tabs from the active catalogue and display the provider’s category names. Sample and live modes can show different tabs.
+- Feature up to three products per category, highest rating first, with ties broken by product ID. When there are at least two products, leave at least one in the remaining section. Show each product once.
+- Search titles and descriptions using a trimmed, case-insensitive substring. A blank search shows all products. While the customer types, suggest up to six matching product titles. Selecting one runs the search immediately. The submitted query stays in the URL.
+- Display demo prices in USD because Fake Store has no currency field. Live products use the provider’s image URLs. Sample products have five bundled WebP images so the demo can display them without an external image service.
 
-## Scope and next steps
+## Enquiries and API behavior
 
-- **Storage.** Skip the database. Fake Store API holds the products, a config file holds the featured IDs, and the inbox holds the enquiries.
-- **Local review.** Use a local SMTP inbox so reviewers can verify an enquiry without creating an account. An explicit sample catalogue mode with bundled images lets reviewers exercise the same flows if Fake Store API is unavailable. Mailpit can run directly on Windows or in Docker.
-- **API safeguards.** Validate requests and upstream data, limit catalogue reads and enquiry submissions separately, and return consistent errors. The in-memory limits suit the single-instance demo.
-- **Room to grow.** Keep the product and mail integrations on the server so each provider can be replaced. Reuse product cards and styles so the visual design can evolve.
-- **With another day.** Automate the browser-to-inbox check and walk through the featured selection with the owner. Revisit storage if they need catalogue editing, enquiry history, or delivery retries.
+- Require a name and email, with an optional message. Validate the input and product on the server. Send to the configured sales inbox and use the customer’s email as Reply-To.
+- Show “Thank you” after SMTP accepts the message. Keep the draft if sending fails. Collapsing the form preserves both the draft and any in-progress submission.
+- Validate data from Fake Store and give requests a five-second timeout. Return consistent API errors so the UI can show an appropriate retry message.
+- Limit catalogue requests to 120 per minute per IP and enquiry submissions to five per ten minutes per IP. The limits use in-memory storage for the single-instance demo.
+
+## Local review
+
+- Keep Fake Store as the default. Offer an explicit sample mode because Fake Store returned HTTP 403 from the test workspace. The same browsing, search, and enquiry flows work with sample data.
+- Use Mailpit to verify email locally without an account. Reviewers can run it directly on Windows or use Docker. The README covers both options.
+
+## With another day
+
+- Automate the browser-to-inbox smoke test and review the featured selection with the owner. Revisit persistent storage when catalogue editing, enquiry history, or delivery retries are needed.
 
 ## Time spent
 
-- Approximately **2–3 hours of active work**, excluding time away. This is an estimate across planning, implementation, testing, and review. Time was recorded as a total.
+- Approximately 2–3 hours of active work across planning, implementation, testing, and review, excluding time away. This is an estimate for the total.

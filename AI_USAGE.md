@@ -1,31 +1,22 @@
 # AI usage
 
-## Tools and models
+## Tools and plan
 
-- ChatGPT (Codex) helped summarize the brief, brainstorm implementation choices, and research comparable take-home exercises. Record the exact model if it is available in the session metadata.
+- I used Codex to break down the brief, draft an implementation plan, build the API and UI, and review and test the result. I used image generation for the five sample product photos.
+- I used `AGENTS.md` for coding instructions and `DECISIONS.md` to record product assumptions. The first milestone was to load a product through the API, submit an enquiry, and see the email in a local inbox.
 
-## Planning and instructions
+## Prompts that shaped the work
 
-- The planning discussion identified a first milestone that goes from backend product data through the detail page and enquiry form to a local sales inbox.
-- Repository instructions are in `AGENTS.md`. Record final product decisions in `DECISIONS.md` or the README.
+1. I asked for the acceptance criteria and the decisions I needed to make before coding. We settled on React and Express with TypeScript, using Fake Store for live products and the sales inbox for enquiries. That kept a database out of scope.
+2. I asked for an API plan before approving implementation. I specified Express conventions, brief comments, focused tests for edge cases, and small commits I could review.
+3. I asked for a clean-checkout demo. Fake Store returned HTTP 403 from the test workspace, so we added an opt-in sample catalogue with local images and verified the browser-to-inbox flow with Mailpit.
+4. I asked for matching products as I typed and for selecting a suggestion to run the search automatically. Codex reused the existing search endpoint. We verified touch and keyboard selection in Chromium.
 
-## Key prompts and decisions
+## Mistakes I caught and how we corrected them
 
-1. Asked for a breakdown of the assignment and scoring criteria, then for the decisions needed before coding. This surfaced homepage curation, category ranking, search matching, and the enquiry success condition as decisions to review.
-
-Add actual prompts or moments as work progresses, aiming for 3–5 in total.
-
-## Review and corrections
-
-Record concrete AI mistakes as they occur, how they were detected, what changed, and how the correction was verified.
-
-## Backend implementation
-
-- Asked Codex to use Express conventions, keep comments brief, and cover corner cases with focused tests. The resulting checks exercise route validation, upstream failures, rate limits, and SMTP outcomes using controlled dependencies.
-- A smoke test assumed live Fake Store API access. It returned HTTP 403 from this workspace. I verified that the API exposed a safe 502, then tested SMTP delivery independently with a product fixture and inspected the Mailpit message.
-
-## Frontend implementation
-
-- Asked Codex to build the catalogue UI and connect it to the existing API. The implementation reused the API's error messages for retry feedback and tested that failed enquiries preserve form input.
-- The first browser smoke test hit a development API already listening on port 3001. I made the Vite proxy target configurable and verified the complete flow on isolated ports with a controlled catalogue and real Mailpit.
-- Generated a product photo contact sheet for the sample catalogue and exported five local WebP images. Added live search suggestions using the existing search endpoint and tested click and keyboard selection.
+| What I noticed | What changed |
+|---|---|
+| The README used `&&` and Bash-style environment variable syntax in the general setup instructions. I hit a parser error in Windows PowerShell 5.1. | We split the install commands and documented separate API startup commands for PowerShell and Bash/Zsh. When Docker Desktop blocked my local test because it needed a WSL update, I asked for a Docker-free path. The README now includes native Mailpit instructions for Windows. |
+| The homepage banner took up most of my screen and pushed the products below the fold. | I shared a screenshot and asked for a more compact layout. Codex removed the banner and put the featured grid immediately below the navigation. Chromium showed all five featured cards without scrolling at the desktop viewport we tested. |
+| I found “Home” ambiguous as a category. Codex renamed it in sample data before I confirmed how category tabs were populated. | I checked whether the tabs were dynamic and asked to discard the rename. We kept category labels driven by the active product source. |
+| Codex's review found that hiding the enquiry form could discard the draft or interrupt the browser's handling of a pending submission. | I approved the fix. The form now stays mounted when collapsed. A regression test verifies that the input survives, only one request is sent, and confirmation appears after success. |
