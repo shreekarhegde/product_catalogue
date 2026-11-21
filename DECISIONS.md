@@ -33,4 +33,4 @@
 
 ## Time spent
 
-- Approximately 2–3 hours of active work across planning, implementation, testing, and review, excluding time away. This is an estimate for the total.
+- Approximately 2–3 hours of active work across planning, implementation, testing, and review, excluding time away. This is an estimate for the total. I did not track the four phases separately.

@@ -2,7 +2,16 @@
 
 Browse featured products and categories, search the catalogue, and send a product enquiry. The React app uses the Express API for catalogue data and enquiries.
 
+React with TypeScript gives the reviewer a browser-based demo and lets the client and server use the same language. Express keeps the API small and makes it straightforward to swap the product and email providers.
+
 ## Local development
+
+Start with the sample catalogue for a repeatable walkthrough. It uses bundled products and images and sends enquiries to the local Mailpit inbox.
+
+```sh
+git clone --branch feature/catalogue-mvp https://github.com/shreekarhegde/product_catalogue.git
+cd product_catalogue
+```
 
 Use Node 24.15 or later in the Node 24 line and Mailpit for the local email inbox. Docker is optional. Run the npm commands from the repository root, the folder containing both `api` and `web`.
 

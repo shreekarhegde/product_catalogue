@@ -2,7 +2,7 @@
 
 ## Tools and plan
 
-- I used Codex to break down the brief, draft an implementation plan, build the API and UI, and review and test the result. I used image generation for the five sample product photos.
+- I used Codex to break down the brief, draft an implementation plan, build the API and UI, and review and test the result. The Codex session showed GPT-6.2 Sol Light during the project. I used OpenAI image generation for the five sample product photos.
 - I used `AGENTS.md` for coding instructions and `DECISIONS.md` to record product assumptions. The first milestone was to load a product through the API, submit an enquiry, and see the email in a local inbox.
 
 ## Prompts that shaped the work
