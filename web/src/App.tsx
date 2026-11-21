@@ -56,17 +56,13 @@ function ProductGrid({ products }: { products: Product[] }) {
 
 function Home() {
   return (
-    <>
-      <div className="hero">
-        <h1>The catalogue</h1>
-        <p>Browse our selection and get in touch about a product.</p>
+    <section aria-labelledby="featured-heading">
+      <div className="catalogue-heading">
+        <h1 id="featured-heading">Featured products</h1>
         <Link className="button" to="/search">Browse all products <span aria-hidden="true">↗</span></Link>
       </div>
-      <section className="section">
-        <h2>Featured products</h2>
-        <Resource load={api.featured}>{(products) => <ProductGrid products={products} />}</Resource>
-      </section>
-    </>
+      <Resource load={api.featured}>{(products) => <ProductGrid products={products} />}</Resource>
+    </section>
   );
 }
 
