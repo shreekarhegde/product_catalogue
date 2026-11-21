@@ -28,3 +28,4 @@ Record concrete AI mistakes as they occur, how they were detected, what changed,
 
 - Asked Codex to build the catalogue UI and connect it to the existing API. The implementation reused the API's error messages for retry feedback and tested that failed enquiries preserve form input.
 - The first browser smoke test hit a development API already listening on port 3001. I made the Vite proxy target configurable and verified the complete flow on isolated ports with a controlled catalogue and real Mailpit.
+- Generated a product photo contact sheet for the sample catalogue and exported five local WebP images. Added live search suggestions using the existing search endpoint and tested click and keyboard selection.
