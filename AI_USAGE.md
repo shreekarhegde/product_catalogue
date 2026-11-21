@@ -23,3 +23,8 @@ Record concrete AI mistakes as they occur, how they were detected, what changed,
 
 - Asked Codex to use Express conventions, keep comments brief, and cover corner cases with focused tests. The resulting checks exercise route validation, upstream failures, rate limits, and SMTP outcomes using controlled dependencies.
 - A smoke test assumed live Fake Store API access. It returned HTTP 403 from this workspace. I verified that the API exposed a safe 502, then tested SMTP delivery independently with a product fixture and inspected the Mailpit message.
+
+## Frontend implementation
+
+- Asked Codex to build the catalogue UI and connect it to the existing API. The implementation reused the API's error messages for retry feedback and tested that failed enquiries preserve form input.
+- The first browser smoke test hit a development API already listening on port 3001. I made the Vite proxy target configurable and verified the complete flow on isolated ports with a controlled catalogue and real Mailpit.
