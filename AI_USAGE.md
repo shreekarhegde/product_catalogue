@@ -18,3 +18,8 @@ Add actual prompts or moments as work progresses, aiming for 3–5 in total.
 ## Review and corrections
 
 Record concrete AI mistakes as they occur, how they were detected, what changed, and how the correction was verified.
+
+## Backend implementation
+
+- Asked Codex to use Express conventions, keep comments brief, and cover corner cases with focused tests. The resulting checks exercise route validation, upstream failures, rate limits, and SMTP outcomes using controlled dependencies.
+- A smoke test assumed live Fake Store API access. It returned HTTP 403 from this workspace. I verified that the API exposed a safe 502, then tested SMTP delivery independently with a product fixture and inspected the Mailpit message.
