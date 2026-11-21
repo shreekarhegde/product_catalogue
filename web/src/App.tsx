@@ -116,7 +116,7 @@ function ProductDetails({ product }: { product: Product }) {
           {showForm ? "Hide enquiry form" : "Enquire"}
         </button>
         <div id="product-enquiry" hidden={!showForm}>
-          {showForm && <EnquiryForm productId={product.id} />}
+          <EnquiryForm productId={product.id} />
         </div>
       </div>
     </article>
